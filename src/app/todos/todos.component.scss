@@ -1,0 +1,21 @@
+ul{
+    
+    li{
+        
+        
+        input{
+            margin-right: 1rem;
+        }
+
+        small{
+            position: absolute;
+            right: 40px;
+            bottom: 5px;
+            font-size: .8rem;
+        } 
+    }
+}
+
+.done{
+    background-color: rgb(72, 255, 0)
+}
