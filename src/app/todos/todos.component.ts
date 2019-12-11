@@ -1,5 +1,6 @@
 import { Component,  OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TodoService } from '../shared/todos.service';
+import { AppComponent } from '../app.component'
 
 
 @Component({
@@ -11,14 +12,12 @@ export class TodosComponent implements OnInit {
 
   private loading: boolean = true;
 
-  constructor(public todosService: TodoService) { }
+  constructor(public appComponent: AppComponent) { }
 
   ngOnInit() {
-    this.todosService.fetchTodos().subscribe(() => {
-      this.loading = false
-    })
+    
   }
-
+/*
   onChange(id: number){
     this.todosService.onToggle(id)
   }
@@ -30,6 +29,6 @@ export class TodosComponent implements OnInit {
   editTodo(id: number){
     
   }
-  
+  */
 
 }

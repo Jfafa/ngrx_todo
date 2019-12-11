@@ -1,13 +1,11 @@
-<mat-list *ngIf="todosService.todos.length; else noTodos">
-  <mat-card *ngFor="let todo of todosService.todos; let i = index">
-    <span [class.done] = "todo.completed">
-      <mat-checkbox color='primary' [checked] = "todo.completed" (change)="onChange(todo.id)"></mat-checkbox>
+<mat-list>
+  <mat-card *ngFor = "let todo of appComponent.todoItems$ | async">
+    <span [class.done] = "todo.isDone">
+      <mat-checkbox color='primary' [checked] = "todo.isDone" (change)="onChange(todo.id)"></mat-checkbox>
     
-      <strong style="padding-left:5px;">{{ i + 1 }}</strong>
-      {{ todo.title }}
+      <strong style="padding-left:5px;">{{ todo.id + 1 }}</strong>
+      {{ todo.text }}
     </span>
-
-    <small>{{todo.date | date:"short"}}</small>
 
     <button mat-button (click)="removeTodo(todo.id)"> Delete</button>
 
