@@ -12,7 +12,7 @@ import { AddTodoItemAction } from './store/actions/todo.actions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private store: Store<AppState>){}0
+  constructor(private store: Store<AppState>){}
   todoItems$: Observable<Array<todoItem>>
 
 
