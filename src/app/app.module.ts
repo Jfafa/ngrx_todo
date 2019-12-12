@@ -8,19 +8,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card'
-import {MatListModule} from '@angular/material/list';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { StoreModule } from '@ngrx/store';
-import { todoReducer } from './store/reducers/todoReducer';
+import { todoReducer } from './store/reducers/todo.reducer';
 import { FormsModule } from '@angular/forms';
-
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditDialogueComponent } from './edit-dialogue/edit-dialogue.component';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodosComponent
+    TodosComponent,
+    EditDialogueComponent
   ],
+  entryComponents: [EditDialogueComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,8 +37,12 @@ import { FormsModule } from '@angular/forms';
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    StoreModule.forRoot({todoList: todoReducer,}),
+    StoreModule.forRoot({ todoList: todoReducer, }),
     FormsModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    MatDialogModule,
+    MatInputModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,12 +1,12 @@
-import { Component,  OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TodoService } from '../shared/todos.service';
-import { AppComponent } from '../app.component'
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { Store } from '@ngrx/store'
 import { AppState } from '../model/app-state.model'
 import { Observable } from 'rxjs';
 import { todoItem } from '../model/todo.model';
-import { AddTodoItemAction } from '../store/actions/todo.actions';
+import { AddTodoItemAction, RemoveTodoItemAction } from '../store/actions/todo.actions';
 import { v4 as uuid } from 'uuid'
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogueComponent } from '../edit-dialogue/edit-dialogue.component';
 
 @Component({
   selector: 'app-todos',
@@ -14,35 +14,31 @@ import { v4 as uuid } from 'uuid'
   styleUrls: ['./todos.component.scss']
 })
 export class TodosComponent implements OnInit {
-  
+  public todoEditing: Boolean = false
 
-  private loading: boolean = true;
-
-  constructor(private store: Store<AppState>){}
+  constructor(private store: Store<AppState>,
+    public dialog: MatDialog, ) { }
   todoItems$: Observable<Array<todoItem>>
-  newTodoItem: todoItem = {id: '', text: '', isDone: false}
+  newTodoItem: todoItem = { id: '', text: '', isDone: false }
 
   ngOnInit(): void {
-   this.todoItems$ = this.store.select(store => store.todoList);
+    this.todoItems$ = this.store.select(store => store.todoList);
   }
-  addItem(){
+
+  addItem() {
     this.newTodoItem.id = uuid();
     this.store.dispatch(new AddTodoItemAction(this.newTodoItem));
-    this.newTodoItem = {id: '', text: '', isDone: false}
-  }
-  
-/*
-  onChange(id: number){
-    this.todosService.onToggle(id)
+    this.newTodoItem = { id: '', text: '', isDone: false }
   }
 
-  removeTodo(id: number){
-    this.todosService.removeTodo(id)
+  deleteItem(id: string) {
+    this.store.dispatch(new RemoveTodoItemAction(id));
   }
 
-  editTodo(id: number){
+  openEditingDialogue(id: string) {
+    this.dialog.open(EditDialogueComponent, {data: {id}});
     
   }
-  */
 
+  
 }
