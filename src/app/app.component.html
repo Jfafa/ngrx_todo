@@ -3,6 +3,12 @@
   
   <h1>{{appTitle}}</h1>
 
+  <ul>
+      <li *ngFor = "let todo of todoItems$ | async">
+          {{todo.text}}
+      </li>
+  </ul>
+
   <app-todos></app-todos>
 </div>
 

@@ -7,11 +7,6 @@ const initialState: Array<todoItem> = [
         text: "test",
         isDone: true
     },
-    {
-        id:"2",
-        text: "te2st",
-        isDone: true
-    }
 ];
 
 export function todoReducer(state: Array<todoItem> = initialState, action: TodoAction){
