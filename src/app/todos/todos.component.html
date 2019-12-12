@@ -4,8 +4,8 @@
       <span [class.done] = "todo.isDone">
         <mat-checkbox color='primary' [checked] = "todo.isDone" (change)="onChange(todo.id)"></mat-checkbox>
       
-        <strong style="padding-left:5px;">{{ todo.id }}</strong>
-        {{ todo.text }}
+        <strong style="padding-left:5px;">{{ todo.text }}</strong>
+        
       </span>
 
       <button mat-button (click)="removeTodo(todo.id)"> Delete</button>
@@ -22,6 +22,7 @@
   type="text"
   [(ngModel)]="newTodoItem.text"
   placeholder="Item"
+  name="todoTextAdd"
   />
   <button type="submit">Add new Todo</button>
   </form>

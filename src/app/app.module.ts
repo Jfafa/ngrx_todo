@@ -13,6 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { StoreModule } from '@ngrx/store';
 import { todoReducer } from './store/reducers/todoReducer';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { todoReducer } from './store/reducers/todoReducer';
     MatButtonModule,
     MatIconModule,
     StoreModule.forRoot({todoList: todoReducer,}),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
