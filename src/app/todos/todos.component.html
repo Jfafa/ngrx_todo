@@ -1,18 +1,27 @@
-<mat-list>
-  <mat-card *ngFor = "let todo of appComponent.todoItems$ | async">
-    <span [class.done] = "todo.isDone">
-      <mat-checkbox color='primary' [checked] = "todo.isDone" (change)="onChange(todo.id)"></mat-checkbox>
-    
-      <strong style="padding-left:5px;">{{ todo.id + 1 }}</strong>
-      {{ todo.text }}
-    </span>
+<div>
+  <mat-list>
+    <mat-card *ngFor = "let todo of todoItems$ | async">
+      <span [class.done] = "todo.isDone">
+        <mat-checkbox color='primary' [checked] = "todo.isDone" (change)="onChange(todo.id)"></mat-checkbox>
+      
+        <strong style="padding-left:5px;">{{ todo.id }}</strong>
+        {{ todo.text }}
+      </span>
 
-    <button mat-button (click)="removeTodo(todo.id)"> Delete</button>
+      <button mat-button (click)="removeTodo(todo.id)"> Delete</button>
 
-    <button mat-button (click)="editTodo(todo.id)">Edit</button>
-  </mat-card>
-</mat-list>
-
-<ng-template #noTodos>
-  <p style="text-align: center;">No todos</p>
-</ng-template>
+      <button mat-button (click)="editTodo(todo.id)">Edit</button>
+    </mat-card>
+  </mat-list>
+  <ng-template #noTodos>
+    <p style="text-align: center;">No todos</p>
+  </ng-template>
+</div>
+<form (ngSubmit)="addItem()">
+  <input
+  type="text"
+  [(ngModel)]="newTodoItem.text"
+  placeholder="Item"
+  />
+  <button type="submit">Add new Todo</button>
+  </form>
