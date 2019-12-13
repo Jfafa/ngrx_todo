@@ -19,6 +19,9 @@ export function todoReducer(state: Array<todoItem> = initialState, action: TodoA
         case TodoActionTypes.EDIT_ITEM:
             state.forEach(item => item.id === action.payload.id ? item.text = action.payload.text: 0);
             return state;
+        case TodoActionTypes.MARK_ITEM:
+            state.forEach(item => item.id === action.payload ? item.isDone = !item.isDone : 0);
+            return state;
         default:
             return state;
     }

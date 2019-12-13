@@ -5,7 +5,7 @@
         <mat-checkbox
           color="primary"
           [checked]="todo.isDone"
-          (change)="onChange(todo.id)"
+          (change)="markTodoItem(todo.id)"
         ></mat-checkbox>
 
         <strong style="padding-left:5px;">{{ todo.text }}</strong>

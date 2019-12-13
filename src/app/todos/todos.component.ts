@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store'
 import { AppState } from '../model/app-state.model'
 import { Observable } from 'rxjs';
 import { todoItem } from '../model/todo.model';
-import { AddTodoItemAction, RemoveTodoItemAction } from '../store/actions/todo.actions';
+import { AddTodoItemAction, RemoveTodoItemAction, MarkTodoItemAction } from '../store/actions/todo.actions';
 import { v4 as uuid } from 'uuid'
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogueComponent } from '../edit-dialogue/edit-dialogue.component';
@@ -37,8 +37,10 @@ export class TodosComponent implements OnInit {
 
   openEditingDialogue(id: string) {
     this.dialog.open(EditDialogueComponent, {data: {id}});
-    
   }
 
+  markTodoItem(id: string){
+    this.store.dispatch(new MarkTodoItemAction(id));
+  }
   
 }
