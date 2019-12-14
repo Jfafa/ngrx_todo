@@ -1,12 +1,15 @@
 <h2 mat-dialogue-title>Choose new text for todo</h2>
 
 <form (ngSubmit)="editItem()">
-  <input
-    type="text"
-    [(ngModel)]="editTodoItem.text"
-    placeholder="Item"
-    name="todoTextEdit"
-  />
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="editTodoItem.text"
+      placeholder="Item"
+      name="todoTextEdit"
+    />
+  </mat-form-field>
   <button mat-button>Edit Todo</button>
   <button mat-button mat-dialog-close>Close todo editing</button>
 </form>

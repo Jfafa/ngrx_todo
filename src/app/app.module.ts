@@ -19,12 +19,15 @@ import { environment } from '../environments/environment';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditDialogueComponent } from './edit-dialogue/edit-dialogue.component';
 import {MatInputModule} from '@angular/material/input';
+import { usersReducer } from './store/reducers/users.reducer';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodosComponent,
-    EditDialogueComponent
+    EditDialogueComponent,
+    LoginComponent
   ],
   entryComponents: [EditDialogueComponent],
   imports: [
@@ -37,7 +40,7 @@ import {MatInputModule} from '@angular/material/input';
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    StoreModule.forRoot({ todoList: todoReducer, }),
+    StoreModule.forRoot({ todoList: todoReducer,  currentUser: usersReducer, }),
     FormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     MatDialogModule,

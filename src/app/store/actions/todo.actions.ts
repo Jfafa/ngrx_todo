@@ -14,7 +14,7 @@ export class AddTodoItemAction implements Action {
     constructor(public payload: todoItem) { }
 }
 
-export class RemoveTodoItemAction implements Action {   
+export class RemoveTodoItemAction implements Action {
     readonly type = TodoActionTypes.REMOVE_ITEM
 
     constructor(public payload: string) { }
@@ -26,10 +26,10 @@ export class EditTodoItemAction implements Action {
     constructor(public payload: todoItem) { }
 }
 
-export class MarkTodoItemAction implements Action{
+export class MarkTodoItemAction implements Action {
     readonly type = TodoActionTypes.MARK_ITEM
 
-    constructor(public payload: string){}
+    constructor(public payload: string) { }
 }
 
 export type TodoAction = | AddTodoItemAction | RemoveTodoItemAction | EditTodoItemAction | MarkTodoItemAction;

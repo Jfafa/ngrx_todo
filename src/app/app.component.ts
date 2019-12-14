@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { UsersState } from './model/users-state.model'
+import { Store } from '@ngrx/store'
+import { Observable } from 'rxjs';
+import { user } from './model/users.model';
 
 
 @Component({
@@ -7,6 +10,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent{
-  
+export class AppComponent implements OnInit{
+  ngOnInit(): void {
+    this.currenUser$ = this.usersStore.select(store => store.currentUser);
+  }
+  constructor(private usersStore: Store<UsersState>){}
+
+  currenUser$: Observable<user>
 }

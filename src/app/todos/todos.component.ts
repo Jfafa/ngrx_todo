@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store'
 import { AppState } from '../model/app-state.model'
 import { Observable } from 'rxjs';
@@ -7,6 +7,9 @@ import { AddTodoItemAction, RemoveTodoItemAction, MarkTodoItemAction } from '../
 import { v4 as uuid } from 'uuid'
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogueComponent } from '../edit-dialogue/edit-dialogue.component';
+import { UsersState } from '../model/users-state.model'
+import { user } from '../model/users.model';
+
 
 @Component({
   selector: 'app-todos',
@@ -14,15 +17,19 @@ import { EditDialogueComponent } from '../edit-dialogue/edit-dialogue.component'
   styleUrls: ['./todos.component.scss']
 })
 export class TodosComponent implements OnInit {
-  public todoEditing: Boolean = false
 
   constructor(private store: Store<AppState>,
+    private usersStore: Store<UsersState>,
     public dialog: MatDialog, ) { }
+    
   todoItems$: Observable<Array<todoItem>>
+  currenUser$: Observable<user>
+
   newTodoItem: todoItem = { id: '', text: '', isDone: false }
 
   ngOnInit(): void {
     this.todoItems$ = this.store.select(store => store.todoList);
+    this.currenUser$ = this.usersStore.select(store => store.currentUser);
   }
 
   addItem() {
@@ -36,11 +43,12 @@ export class TodosComponent implements OnInit {
   }
 
   openEditingDialogue(id: string) {
-    this.dialog.open(EditDialogueComponent, {data: {id}});
+    this.dialog.open(EditDialogueComponent, { data: { id } });
   }
 
-  markTodoItem(id: string){
+  markTodoItem(id: string) {
     this.store.dispatch(new MarkTodoItemAction(id));
   }
+
   
 }

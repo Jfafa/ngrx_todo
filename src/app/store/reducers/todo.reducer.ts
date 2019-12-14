@@ -1,13 +1,7 @@
 import { todoItem } from "../../model/todo.model";
 import { TodoAction, TodoActionTypes } from '../actions/todo.actions';
 
-const initialState: Array<todoItem> = [
-    {
-        id: "1",
-        text: "test",
-        isDone: true
-    },
-];
+const initialState: Array<todoItem> = [];
 
 export function todoReducer(state: Array<todoItem> = initialState, action: TodoAction) {
 
@@ -17,7 +11,7 @@ export function todoReducer(state: Array<todoItem> = initialState, action: TodoA
         case TodoActionTypes.REMOVE_ITEM:
             return state.filter(item => item.id !== action.payload);
         case TodoActionTypes.EDIT_ITEM:
-            state.forEach(item => item.id === action.payload.id ? item.text = action.payload.text: 0);
+            state.forEach(item => item.id === action.payload.id ? item.text = action.payload.text : 0);
             return state;
         case TodoActionTypes.MARK_ITEM:
             state.forEach(item => item.id === action.payload ? item.isDone = !item.isDone : 0);

@@ -21,11 +21,14 @@
   </ng-template>
 </div>
 <form (ngSubmit)="addItem()">
-  <input
-    type="text"
-    [(ngModel)]="newTodoItem.text"
-    placeholder="Item"
-    name="todoTextAdd"
-  />
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="newTodoItem.text"
+      placeholder="Item"
+      name="todoTextAdd"
+    />
+  </mat-form-field>
   <button mat-button>Add new Todo</button>
 </form>
