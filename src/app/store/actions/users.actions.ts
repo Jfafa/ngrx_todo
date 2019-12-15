@@ -6,10 +6,10 @@ export enum UsersActionType{
     EDIT_USER_DATA = '[Users]Edit user'
 }
 
-export class AddTodoItemAction implements Action {
+export class EditUserDataAction implements Action {
     readonly type = UsersActionType.EDIT_USER_DATA
 
     constructor(public payload: user) { }
 }
 
-export type UsersAction = | AddTodoItemAction;
+export type UsersAction = | EditUserDataAction;

@@ -12,9 +12,8 @@ const initialState: user = {
 export function usersReducer(state: user = initialState, action: UsersAction) {
 
     switch (action.type) {
-        case UsersActionType.EDIT_USER_DATA:
-        state = action.payload    
-        return state;
+        case UsersActionType.EDIT_USER_DATA:    
+            return action.payload;
         default:
             return state;
     }

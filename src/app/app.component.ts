@@ -11,10 +11,10 @@ import { user } from './model/users.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
+  currentUser$: Observable<user>
   ngOnInit(): void {
-    this.currenUser$ = this.usersStore.select(store => store.currentUser);
+    this.currentUser$ = this.usersStore.select(store => store.currentUser);
   }
   constructor(private usersStore: Store<UsersState>){}
 
-  currenUser$: Observable<user>
 }
