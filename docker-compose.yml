@@ -5,11 +5,11 @@ services:
     depends_on: 
       - nginx
     volumes:
-      - /DIST:/home
+      - ./DIST:/home/dists
   nginx:
     image: "nginx:latest"
     ports: 
       - 80:80
     volumes: 
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - /DIST:/home
+      - ./DIST:/home/dists
