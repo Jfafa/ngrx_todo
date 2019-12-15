@@ -3,6 +3,7 @@ import { UsersState } from './model/users-state.model'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs';
 import { user } from './model/users.model';
+import { AppState } from './model/app-state.model';
 
 
 @Component({
@@ -11,10 +12,13 @@ import { user } from './model/users.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  currentUser$: Observable<user>
+  currentUser: any;
+  currentUser$: any;
   ngOnInit(): void {
-    this.currentUser$ = this.usersStore.select(store => store.currentUser);
+    this.currentUser$ = this.store.pipe().subscribe(store => {
+      this.currentUser = store.currentUser;
+    });
   }
-  constructor(private usersStore: Store<UsersState>){}
+  constructor(private store: Store<AppState>){}
 
 }

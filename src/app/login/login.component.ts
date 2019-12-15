@@ -5,6 +5,7 @@ import { Observable, from } from 'rxjs';
 import { user } from '../model/users.model';
 import { loginService} from '../../shared/login.service'
 import { EditUserDataAction } from '../store/actions/users.actions'
+import { AppState } from '../model/app-state.model';
 
 @Component({
   selector: 'app-login',
@@ -21,14 +22,17 @@ export class LoginComponent implements OnInit {
     isLogged: false
   }
 
-  constructor(private usersStore: Store<UsersState>){
+  constructor(private store: Store<AppState>){
     this.log = new loginService; 
   }
 
-  currentUser$: Observable<user>
+  currentUser: any;
+  currentUser$: any;
 
   ngOnInit() {
-    this.currentUser$ = this.usersStore.select(store => store.currentUser);
+    this.currentUser$ = this.store.pipe().subscribe(store => {
+      this.currentUser = store.currentUser;
+    });
   }
 
   login(){
@@ -36,7 +40,7 @@ export class LoginComponent implements OnInit {
     if(user){
       this.loginObject.isLogged = true
       this.loginObject.isAdmin = user.isAdmin
-      this.usersStore.dispatch(new EditUserDataAction(this.loginObject))
+      this.store.dispatch(new EditUserDataAction(this.loginObject))
     }
     else alert('wrong password or login')
     console.log(this.currentUser$)
