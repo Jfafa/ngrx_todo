@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../model/app-state.model';
 import { EditTodoItemAction } from '../store/actions/todo.actions'
 import {MAT_DIALOG_DATA} from '@angular/material'
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-dialogue',
@@ -18,6 +19,7 @@ export class EditDialogueComponent implements OnInit {
   public editTodoText: string
  
   constructor(private store: Store<AppState>,
+    public dialogRef: MatDialogRef<EditDialogueComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.editId = data.id;
   }
@@ -33,6 +35,7 @@ export class EditDialogueComponent implements OnInit {
     this.editTodoItem.id = this.editId;
     this.store.dispatch(new EditTodoItemAction(this.editTodoItem));
     this.editTodoItem.text = '';
+    this.dialogRef.close();
   }
 
 }
