@@ -1,4 +1,7 @@
 <div>
+  <nav>
+    <a mat-button routerLink="/admin" routerLinkActive="active">Admin panel</a>
+  </nav>
   <div>
     <mat-list>
       <mat-card *ngFor="let todo of todoItems$ | async">

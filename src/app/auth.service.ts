@@ -32,7 +32,7 @@ users = [{
 
 
 isUserLoggedIn() :boolean{
-  return this.currentUser.isUserLoggedIn
+  return this.currentUser.isLogged
 }
 
 isUserAdmin() :boolean{

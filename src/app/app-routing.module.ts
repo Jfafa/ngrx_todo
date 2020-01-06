@@ -10,7 +10,7 @@ import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: 'user', component: TodosComponent, canActivate: [AuthGuard]},
+  {path: 'dashboard', component: TodosComponent, canActivate: [AuthGuard]},
   {path: 'admin', component: AdminTodoComponent, canActivate: [AdminGuard]},
   {path: 'login', component: LoginComponent},
   {path: "**", component: PageNotFoundComponent}

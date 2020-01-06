@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     }
     else alert('Wrong password or login')
     console.log(this.currentUser$)
-    this.router.navigateByUrl('/user');
+    this.router.navigate(['/dashboard']);
   }
 
 }
