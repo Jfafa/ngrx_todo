@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TodosComponent } from './todos/todos.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,16 +18,21 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditDialogueComponent } from './edit-dialogue/edit-dialogue.component';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { usersReducer } from './store/reducers/users.reducer';
 import { LoginComponent } from './login/login.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AdminTodoComponent } from './admin-todo/admin-todo.component';
+import { AuthGuard } from './auth.guard';
+import { AdminGuard } from './admin.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodosComponent,
     EditDialogueComponent,
-    LoginComponent
+    routingComponents,
+    PageNotFoundComponent,
+    AdminTodoComponent
   ],
   entryComponents: [EditDialogueComponent],
   imports: [
@@ -47,7 +52,7 @@ import { LoginComponent } from './login/login.component';
     MatInputModule,
     
   ],
-  providers: [],
+  providers: [AuthGuard, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

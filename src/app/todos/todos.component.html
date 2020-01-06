@@ -11,10 +11,6 @@
 
           <strong style="padding-left:5px;">{{ todo.text }}</strong>
         </span>
-
-        <button *ngIf="currentUser.isAdmin" mat-button (click)="deleteItem(todo.id)">Delete</button>
-
-        <button *ngIf="currentUser.isAdmin" mat-button (click)="openEditingDialogue(todo.id)">Edit</button>
       </mat-card>
     </mat-list>
     <ng-template #noTodos>

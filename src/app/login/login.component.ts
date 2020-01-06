@@ -3,9 +3,10 @@ import { UsersState } from '../model/users-state.model';
 import { Store } from '@ngrx/store';
 import { Observable, from } from 'rxjs';
 import { user } from '../model/users.model';
-import { loginService} from '../../shared/login.service'
+import { AuthService} from '../auth.service'
 import { EditUserDataAction } from '../store/actions/users.actions'
 import { AppState } from '../model/app-state.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { AppState } from '../model/app-state.model';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  log: any;
+  
 
   loginObject = {
     login: '',
@@ -22,8 +23,7 @@ export class LoginComponent implements OnInit {
     isLogged: false
   }
 
-  constructor(private store: Store<AppState>){
-    this.log = new loginService; 
+  constructor(private store: Store<AppState>, private router: Router, private log: AuthService){ 
   }
 
   currentUser: any;
@@ -42,8 +42,9 @@ export class LoginComponent implements OnInit {
       this.loginObject.isAdmin = user.isAdmin
       this.store.dispatch(new EditUserDataAction(this.loginObject))
     }
-    else alert('wrong password or login')
+    else alert('Wrong password or login')
     console.log(this.currentUser$)
+    this.router.navigateByUrl('/user');
   }
 
 }

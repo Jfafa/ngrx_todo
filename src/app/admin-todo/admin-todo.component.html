@@ -1,0 +1,37 @@
+<div>
+    <div>
+      <mat-list>
+        <mat-card *ngFor="let todo of todoItems$ | async">
+          <span [class.done]="todo.isDone">
+            <mat-checkbox
+              color="primary"
+              [checked]="todo.isDone"
+              (change)="markTodoItem(todo.id)"
+            ></mat-checkbox>
+  
+            <strong style="padding-left:5px;">{{ todo.text }}</strong>
+          </span>
+  
+          <button mat-button (click)="deleteItem(todo.id)">Delete</button>
+  
+          <button mat-button (click)="openEditingDialogue(todo.id)">Edit</button>
+        </mat-card>
+      </mat-list>
+      <ng-template #noTodos>
+        <p style="text-align: center;">No todos</p>
+      </ng-template>
+    </div>
+    <form (ngSubmit)="addItem()">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="newTodoItem.text"
+          placeholder="Item"
+          name="todoTextAdd"
+        />
+      </mat-form-field>
+      <button mat-button>Add new Todo</button>
+    </form>
+  </div>
+  
