@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditDialogueComponent } from '../edit-dialogue/edit-dialogue.component';
 import { UsersState } from '../model/users-state.model'
 import { user } from '../model/users.model';
-
+import { GetTodosItemsAction } from '../store/actions/todo.actions'
 
 @Component({
   selector: 'app-todos',
@@ -28,7 +28,8 @@ export class TodosComponent implements OnInit {
 
   newTodoItem: todoItem = { id: '', text: '', isDone: false }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.store.dispatch(new GetTodosItemsAction())
     this.todoItems$ = this.store.select(store => store.todoList);
     this.currentUser$ = this.store.pipe().subscribe(store => {
       this.currentUser = store.currentUser;

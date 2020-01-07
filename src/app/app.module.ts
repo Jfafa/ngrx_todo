@@ -25,7 +25,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AdminTodoComponent } from './admin-todo/admin-todo.component';
 import { AuthGuard } from './auth.guard';
 import { AdminGuard } from './admin.guard';
-
+import { TodoEffects } from './store/effects/todos.effects';
+import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,7 @@ import { AdminGuard } from './admin.guard';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     MatDialogModule,
     MatInputModule,
-    
+    EffectsModule.forRoot([TodoEffects]),
   ],
   providers: [AuthGuard, AdminGuard],
   bootstrap: [AppComponent]

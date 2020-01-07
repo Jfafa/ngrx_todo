@@ -16,7 +16,11 @@ export function todoReducer(state: Array<todoItem> = initialState, action: TodoA
         case TodoActionTypes.MARK_ITEM:
             state.forEach(item => item.id === action.payload ? item.isDone = !item.isDone : 0);
             return state;
-        default:
+        case TodoActionTypes.GET_TODOS_SUCCESS:
+            console.log(222222222)
+            const items: todoItem[] = action.payload;
+            return items
+       default:
             return state;
     }
 }

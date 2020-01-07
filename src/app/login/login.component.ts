@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
     isLogged: false
   }
 
+  apiLoginObject = {
+    login: '',
+    password: ''
+  }
+
   constructor(private store: Store<AppState>, private router: Router, private log: AuthService){ 
   }
 
@@ -36,15 +41,25 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    var user = this.log.isPresentInUsersList(this.loginObject.login, this.loginObject.password)
-    if(user){
-      this.loginObject.isLogged = true
-      this.loginObject.isAdmin = user.isAdmin
-      this.store.dispatch(new EditUserDataAction(this.loginObject))
-    }
-    else alert('Wrong password or login')
-    console.log(this.currentUser$)
-    this.router.navigate(['/dashboard']);
+    console.log(this.apiLoginObject)
+    this.log.loginUser(this.apiLoginObject).subscribe(
+      res => {
+        let user = res;
+        this.loginObject.isLogged = true
+        this.loginObject.isAdmin = user.isAdmin
+        this.loginObject.login = user.login
+        this.loginObject.password = user.password
+        this.store.dispatch(new EditUserDataAction(this.loginObject))
+        this.router.navigate(['/dashboard']);
+      },
+      err => {
+        alert('Wrong password or login')
+         console.error(111, err)
+      }
+    )
+
+    //var user = this.log.isPresentInUsersList(this.loginObject.login, this.loginObject.password)
+   
   }
 
 }
