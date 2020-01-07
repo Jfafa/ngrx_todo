@@ -57,9 +57,5 @@ export class LoginComponent implements OnInit {
          console.error(111, err)
       }
     )
-
-    //var user = this.log.isPresentInUsersList(this.loginObject.login, this.loginObject.password)
-   
   }
-
 }

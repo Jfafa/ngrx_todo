@@ -8,7 +8,7 @@ import { v4 as uuid } from 'uuid'
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogueComponent } from '../edit-dialogue/edit-dialogue.component';
 import { UsersState } from '../model/users-state.model'
-import { user } from '../model/users.model';
+import { TodoService} from '../todo.service'
 
 @Component({
   selector: 'app-admin-todo',
@@ -19,7 +19,8 @@ export class AdminTodoComponent implements OnInit {
 
   constructor(private store: Store<AppState>,
     private usersStore: Store<UsersState>,
-    public dialog: MatDialog, ) { }
+    public dialog: MatDialog, 
+    private service: TodoService) { }
     
   todoItems$: Observable<Array<todoItem>>;
   currentUser: any;
@@ -37,11 +38,19 @@ export class AdminTodoComponent implements OnInit {
   addItem() {
     this.newTodoItem.id = uuid();
     this.store.dispatch(new AddTodoItemAction(this.newTodoItem));
+    this.service.addTodo(this.newTodoItem).subscribe(
+      res => {console.log(res)},
+      err => {console.error(err)}
+    )
     this.newTodoItem = { id: '', text: '', isDone: false }
   }
 
   deleteItem(id: string) {
     this.store.dispatch(new RemoveTodoItemAction(id));
+    this.service.deleteTodo(id).subscribe(
+      res => {console.log(res)},
+      err => {console.error(err)}
+    )
   }
 
   openEditingDialogue(id: string) {
@@ -50,8 +59,9 @@ export class AdminTodoComponent implements OnInit {
 
   markTodoItem(id: string) {
     this.store.dispatch(new MarkTodoItemAction(id));
+    this.service.markTodo(id).subscribe(
+      res => {console.log(res)},
+      err => {console.error(err)}
+    )
   }
-
-  
-
 }
